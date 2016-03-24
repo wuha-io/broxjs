@@ -5,7 +5,6 @@
   "description": "A pure JS Browser Extension Framework",
   "license": "MIT",
   "main": "index.js",
-  "private": true,
   "keywords": [
     "browser",
     "extension",
