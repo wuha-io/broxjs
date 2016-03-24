@@ -1,20 +1,12 @@
 'use strict';
 
 import should from 'should';
+import utils from './_utils';
 import counter2 from '../src/counter2';
 
-describe('Counters', () => {
+const createCounter = logs => utils.createCounter(counter2, logs);
 
-  // instantiates a simple counter2
-  const createCounter = logs => {
-    // push mssages into an array in order to assert
-    const logger = { trace: str => logs.push(str) };
-    const counter = counter2({
-      vars: {},
-      api: { logger: logger }
-    });
-    return counter;
-  };
+describe('Counter 2', () => {
 
   it('should only accept sayHello events', done => {
     let logs = [];

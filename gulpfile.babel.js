@@ -40,6 +40,7 @@ gulp.task('jshint', () => {
 
 gulp.task('test', () => {
   return gulp.src(glob.test, {
+    grep: /^_/i,
     read: false
   }).pipe(plugins.mocha({
     reporter: 'spec'

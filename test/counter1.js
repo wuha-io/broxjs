@@ -3,7 +3,7 @@
 import should from 'should';
 import counter1 from '../src/counter1';
 
-describe('Counter background', () => {
+describe('Counter 1', () => {
 
   it('should increment a counter', done => {
     const counter = counter1({vars: {counter: 0}});
