@@ -26,7 +26,8 @@
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.4.5",
     "run-sequence": "^1.1.5",
-    "should": "^8.2.2"
+    "should": "^8.2.2",
+    "virtual-dom": "^2.1.1"
   },
   "contributors": [
     {
