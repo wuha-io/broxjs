@@ -1,17 +1,17 @@
 'use strict';
 
 import gulp from 'gulp';
+import gulpLoad from 'gulp-load-plugins';
 import seq from 'run-sequence';
-import clean from 'gulp-clean';
-import babel from 'gulp-babel';
-import jshint from 'gulp-jshint';
-import mocha from 'gulp-mocha';
-import watch from 'gulp-watch';
+import childProc from 'child_process';
+
+const plugins = gulpLoad();
+const basePath = __dirname;
 
 const dirs = {
-  src: 'src',
-  build: 'build',
-  test: 'test'
+  src: basePath + '/src',
+  build: basePath + '/build',
+  test: basePath + '/test'
 };
 
 const glob = {
@@ -22,29 +22,36 @@ const glob = {
 
 gulp.task('pre-clean', () => {
   return gulp.src(glob.build)
-    .pipe(clean());
+    .pipe(plugins.clean());
 });
 
 gulp.task('compile', () => {
   return gulp.src(glob.src)
-    .pipe(babel({
+    .pipe(plugins.babel({
       presets: ['es2015']
     })).pipe(gulp.dest(dirs.build));
 });
 
-gulp.task('lint', () => {
+gulp.task('jshint', () => {
   return gulp.src(glob.src)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('test', () => {
   return gulp.src(glob.test, {
     read: false
-  }).pipe(mocha({
+  }).pipe(plugins.mocha({
     reporter: 'spec'
   })).once('error', () => {
     process.exit(1);
+  });
+});
+
+gulp.task('shrink', cbk => {
+  childProc.exec('npm shrinkwrap', (err, stdout, stderr) => {
+    console.error(err || stderr, stdout);
+    cbk(err);
   });
 });
 
@@ -53,4 +60,4 @@ gulp.task('default', () => {
   gulp.watch(glob.test, ['test']);
 });
 
-gulp.task('build', cbk => seq('lint', 'test', 'pre-clean', 'compile', cbk));
+gulp.task('build', cbk => seq('jshint', 'test', 'pre-clean', 'compile', cbk));
