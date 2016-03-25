@@ -47,6 +47,7 @@ Let's see what configurations files we need for Chrome and Firefox :
 ```
 
 **For Firefox**
+
 Here the name's key is different.
 ```json
 {
