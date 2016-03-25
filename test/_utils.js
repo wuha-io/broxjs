@@ -6,9 +6,8 @@ import jsdom from 'jsdom';
 const createDOM = html => {
   return new Promise((resolve, reject) => {
     jsdom.env(html, (err, window) => {
-      if (err) {
+      if (err)
         return reject(err);
-      }
       resolve(window);
     });
   });
