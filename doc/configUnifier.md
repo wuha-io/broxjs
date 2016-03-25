@@ -1,5 +1,5 @@
 
-# Config Unifier
+# Configuration Unifier
 
 The goal is to define a configuration unification format of the extension manifest file.
 

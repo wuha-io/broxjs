@@ -7,6 +7,18 @@
 
 **Goal:** Think about and build a pure JavaScript Browser Extension Framework.
 
+Available Gulp commands :
+
+```bash
+gulp pre-clean # clean build/
+gulp compile # es6 -> es5
+gulp jshint # check code syntax
+gulp test # run the test (directly in es6)
+gulp shrink # fix dependencies versions
+gulp build # jshint, test, pre-clean and compile
+gulp # (default - for development) watch and build / run tests
+```
+
 ## [TODO](https://github.com/wuha-io/broxjs/blob/master/TODO.md)
 
 ## [Configuration Unifier](https://github.com/wuha-io/broxjs/blob/master/doc/configUnifier.md)
