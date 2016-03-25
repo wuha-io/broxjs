@@ -20,22 +20,30 @@ const glob = {
   test: dirs.test + '/**/*.js'
 };
 
+const onError = err => {
+  console.error(err);
+  process.exit(1);
+};
+
 gulp.task('pre-clean', () => {
   return gulp.src(glob.build)
-    .pipe(plugins.clean());
+    .pipe(plugins.clean())
+    .once('error', onError);
 });
 
 gulp.task('compile', () => {
   return gulp.src(glob.src)
     .pipe(plugins.babel({
       presets: ['es2015']
-    })).pipe(gulp.dest(dirs.build));
+    })).pipe(gulp.dest(dirs.build))
+    .once('error', onError);
 });
 
 gulp.task('jshint', () => {
   return gulp.src(glob.src)
     .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('jshint-stylish'));
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
+    .once('error', onError);
 });
 
 gulp.task('test', () => {
@@ -44,9 +52,7 @@ gulp.task('test', () => {
     read: false
   }).pipe(plugins.mocha({
     reporter: 'spec'
-  })).once('error', () => {
-    process.exit(1);
-  });
+  })).once('error', onError);
 });
 
 gulp.task('shrink', cbk => {
