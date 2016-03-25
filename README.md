@@ -3,7 +3,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 
-**/!\ SPEC ONLY /!\**
+:warning: **CURRENTLY IN SPECIFICATION** :warning:
 
 **Goal:** Think about and build a pure JavaScript Browser Extension Framework.
 
