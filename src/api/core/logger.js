@@ -2,11 +2,7 @@
 
 import util from 'util';
 
-export const LEVEL = {
-  DEBUG: 0,
-  INFO: 1,
-  ERROR: 2
-};
+export const LEVEL = { DEBUG: 0, INFO: 1, ERROR: 2 };
 
 export class CoreLogger {
 
@@ -16,6 +12,7 @@ export class CoreLogger {
   }
 
   static build_(message, ...vars) {
+    //TODO
     return message;
   }
 

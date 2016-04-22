@@ -14,7 +14,7 @@
     },
     "background": {
       "type": "object",
-      "child": {
+      "children": {
         "page": "string",
         "scripts": "string[]"
       }
