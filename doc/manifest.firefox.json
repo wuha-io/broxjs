@@ -9,7 +9,7 @@
   },
   "browser_action": {
     "default_icon": {
-      "38": "images/icon-38-off.png"
+      "38": "images/icon-38.png"
     },
     "default_title": "My Extension",
     "default_popup": "popup.html"
