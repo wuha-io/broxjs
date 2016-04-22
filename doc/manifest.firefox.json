@@ -41,8 +41,6 @@
     }
   ],
   "permissions": ["tabs"],
-
-
   "applications": {
     "gecko": {
       "id": "uuid",
