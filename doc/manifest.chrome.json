@@ -41,8 +41,6 @@
     }
   ],
   "permissions": ["tabs"],
-
-
   "homepage_url": "http://path/to/homepage",
   "update_url": "http://path/to/updateInfo.xml"
 }

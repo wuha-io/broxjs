@@ -3,7 +3,6 @@
 import gulp from 'gulp';
 import gulpLoad from 'gulp-load-plugins';
 import seq from 'run-sequence';
-import childProc from 'child_process';
 
 const plugins = gulpLoad();
 const basePath = __dirname;
@@ -53,13 +52,6 @@ gulp.task('test', () => {
   }).pipe(plugins.mocha({
     reporter: 'spec'
   })).once('error', onError);
-});
-
-gulp.task('shrink', cbk => {
-  childProc.exec('npm shrinkwrap', (err, stdout, stderr) => {
-    console.error(err || stderr, stdout);
-    cbk(err);
-  });
 });
 
 gulp.task('default', () => {
