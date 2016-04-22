@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "name": "My Extension",
+  "version": "1.0.0",
+  "default_locale":"en",
+  "description":"A plain text description",
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "images/icon-38-off.png"
+    },
+    "default_title": "My Extension",
+    "default_popup": "popup.html"
+  },
+  "author": "Firstname name <name@domain.com>",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "page": "my-background.html"
+  },
+  "content_scripts":  [
+    {
+      "exclude_matches": [
+        "*://exclude_matches.com"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": ["tabs"],
+
+
+  "homepage_url": "http://path/to/homepage",
+  "update_url": "http://path/to/updateInfo.xml"
+}
