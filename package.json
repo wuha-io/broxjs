@@ -1,6 +1,6 @@
 {
   "name": "broxjs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Wuha <contact@wuha.io>",
   "description": "A pure JS Browser Extension Framework",
   "license": "MIT",
