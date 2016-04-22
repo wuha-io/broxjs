@@ -2,8 +2,8 @@
   "manifest_version": 2,
   "name": "My Extension",
   "version": "1.0.0",
-  "default_locale": "en",
-  "description": "A plain text description",
+  "default_locale":"en",
+  "description":"A plain text description",
   "icons": {
     "128": "images/icon-128.png"
   },
@@ -19,7 +19,7 @@
     "scripts": [
       "background.js"
     ],
-    "page": "background.html"
+    "page": "my-background.html"
   },
   "content_scripts":  [
     {
@@ -40,8 +40,9 @@
       "all_frames": false
     }
   ],
-  "homepage_url": "http://path/to/homepage",
-  "minimum_chrome_version": "versionString",
   "permissions": ["tabs"],
+
+
+  "homepage_url": "http://path/to/homepage",
   "update_url": "http://path/to/updateInfo.xml"
 }

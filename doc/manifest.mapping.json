@@ -1,0 +1,84 @@
+{
+  "platforms": [
+    "chrome",
+    "firefox"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "string",
+      "required": true
+    },
+    "default_locale": {
+      "type": "string",
+      "recommended": true
+    },
+    "description": {
+      "type": "string",
+      "recommended": true
+    },
+    "icons": {
+      "type": "object",
+      "children": {
+        "16": "string",
+        "48": "string",
+        "128": "string"
+      },
+      "recommended": true
+    },
+    "browser_action": {
+      "type": "object",
+      "children": {
+        "default_icon": {
+          "type": "object",
+          "children":{
+            "19": "string",
+            "38": "string"
+          }
+        },
+        "default_title": "string",
+        "default_popup": "string"
+      }
+    },
+    "author": {
+      "type": "string"
+    },
+    "background": {
+      "type": "object",
+      "children": {
+        "page": "string",
+        "scripts": "string[]"
+      }
+    },
+    "content_scripts": {
+      "type": "object",
+      "children": {
+        "exclude_matches": "string[]",
+        "matches": "string[]",
+        "js": "string[]",
+        "css": "string[]",
+        "run_at": "string",
+        "all_frames": "boolean"
+      }
+    },
+    "permissions": {
+      "type": "string[]"
+    },
+    "update_url":  {
+      "type": "string",
+      "mapping": {
+        "firefox": "applications.gecko.update_url"
+      }
+    },
+    "extension_url":  {
+      "type": "string",
+      "mapping": {
+        "chrome":"homepage_url",
+        "firefox": "developer.url"
+      }
+    }
+  }
+}
