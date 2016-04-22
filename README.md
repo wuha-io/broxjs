@@ -23,6 +23,8 @@ gulp # (default - for development) watch and build / run tests
 
 ## [Configuration Unifier](https://github.com/wuha-io/broxjs/blob/master/doc/configUnifier.md)
 
+## [Yeoman Generator](https://github.com/wuha-io/generator-broxjs)
+
 ## Others
 
 - [Chrome documentation](https://developer.chrome.com/extensions/api_index)
