@@ -1,5 +1,10 @@
 
-# API : Notification
+# API : notification
+
+
+## Manifest
+
+To use this API you need to have the "notifications" permission.
 
 ## Method
 
