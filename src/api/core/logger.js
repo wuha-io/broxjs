@@ -35,4 +35,4 @@ export class CoreLogger {
     return this.log_(LEVEL.ERROR, CoreLogger.build_(message, vars));
   }
 
-};
+}

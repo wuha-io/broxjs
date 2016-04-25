@@ -5,7 +5,13 @@
   "description": "A pure JS Browser Extension Framework",
   "license": "MIT",
   "main": "index.js",
-  "keywords": ["browser", "extension", "framework", "javascript", "node"],
+  "keywords": [
+    "browser",
+    "extension",
+    "framework",
+    "javascript",
+    "node"
+  ],
   "private": true,
   "devDependencies": {
     "babel-core": "^6.7.0",
@@ -28,12 +34,21 @@
     "should": "^8.2.2"
   },
   "contributors": [
-    {"name": "Brice Colucci", "email": "brice.colucci@gmail.com"},
-    {"name": "Arnaud Laval", "email": "arnaud.laval2@sfr.fr"}
+    {
+      "name": "Brice Colucci",
+      "email": "brice.colucci@gmail.com"
+    },
+    {
+      "name": "Arnaud Laval",
+      "email": "arnaud.laval2@sfr.fr"
+    }
   ],
   "homepage": "https://github.com/wuha-io/broxjs#readme",
   "bugs": {
     "url": "https://github.com/wuha-io/broxjs/issues"
+  },
+  "bin": {
+    "broxjs": "build/bin/broxjs.js"
   },
   "scripts": {
     "start": "gulp",
@@ -42,5 +57,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wuha-io/broxjs.git"
+  },
+  "dependencies": {
+    "yesno": "0.0.1"
   }
 }
