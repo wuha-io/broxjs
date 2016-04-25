@@ -1,0 +1,7 @@
+{
+  "name": "my-extension",
+  "private": true,
+  "authors": [
+    "Brice Colucci <bcolucci@wuha.io>"
+  ]
+}

@@ -2,9 +2,9 @@
 
 'use strict';
 
-var _bluebird = require('bluebird');
+var _fsExtra = require('fs-extra');
 
-var _bluebird2 = _interopRequireDefault(_bluebird);
+var _fsExtra2 = _interopRequireDefault(_fsExtra);
 
 var _async = require('async');
 
@@ -18,13 +18,11 @@ var _prompt = require('prompt');
 
 var _prompt2 = _interopRequireDefault(_prompt);
 
-var _safe = require('colors/safe');
+var _colors = require('colors');
 
-var _safe2 = _interopRequireDefault(_safe);
+var _colors2 = _interopRequireDefault(_colors);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var fs = _bluebird2.default.promisifyAll(require('fs-extra'));
 
 var CUR_DIR = process.cwd();
 var TPL_DIR = '/usr/local/lib/node_modules/broxjs/template';
@@ -46,10 +44,18 @@ var error = function error(err) {
         default: 'My Extension',
         required: true
       },
+      shortName: {
+        message: 'Extension\'s short name',
+        default: 'my-extension',
+        required: true
+      },
       version: {
         message: 'Starting version',
         default: '0.1.0',
         required: true
+      },
+      repository: {
+        message: 'CVS repository'
       },
       author: {
         message: 'Author',
@@ -65,12 +71,21 @@ var error = function error(err) {
     }
   };
 
-  _prompt2.default.message = _safe2.default.red('Broxjs');
+  _prompt2.default.message = 'Broxjs'.bold.yellow;
   _prompt2.default.start();
+
+  console.log();
 
   _prompt2.default.get(schema, function (err, result) {
 
     if (err) return error(err);
+
+    var operations = [];
+    var writeJsonOperation = function writeJsonOperation(file, obj) {
+      return operations.push(function (cbk) {
+        return _fsExtra2.default.writeJson(file, obj, { spaces: 2 }, cbk);
+      });
+    };
 
     var extInfos = require(TPL_DIR + '/extension.json');
     extInfos.name = extInfos.browser_action.default_title = result.name;
@@ -79,9 +94,31 @@ var error = function error(err) {
     extInfos.description = result.description;
     extInfos.extension_url = result.homepageURL;
     extInfos.update_url = result.homepageURL + '/update';
+    writeJsonOperation(CUR_DIR + '/extension.json', extInfos);
 
-    //console.log(JSON.stringify(extInfos, null, 2));
+    var npm = require(TPL_DIR + '/package.json');
+    npm.name = result.shortName;
+    npm.version = result.version;
+    npm.description = result.description;
+    if (result.repository) npm.repository = result.repository;
+    writeJsonOperation(CUR_DIR + '/package.json', npm);
 
-    fs.writeJson(CUR_DIR + '/extension.json', extInfos, { spaces: 2 });
+    var bower = require(TPL_DIR + '/bower.json');
+    bower.name = result.shortName;
+    bower.authors.push(result.author);
+    writeJsonOperation(CUR_DIR + '/bower.json', bower);
+
+    ['assets/', 'src/', 'test/', 'views/'].concat(['.babelrc', '.bowerrc', '.editorconfig', '.gitattributes', '.gitignore', '.jshintrc']).concat(['LICENSE', 'README.md']).concat(['gulpfile.babel.js']).forEach(function (file) {
+      return operations.push(function (cbk) {
+        return _fsExtra2.default.copy(TPL_DIR + '/' + file, CUR_DIR, cbk);
+      });
+    });
+
+    _async2.default.parallel(operations, function (err, results) {
+
+      if (err) return error(err);
+
+      console.log('\nCongralutions! Your extension is ready, please...'.bold.green);
+    });
   });
 });

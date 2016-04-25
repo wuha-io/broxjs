@@ -1,7 +1,5 @@
 {
-  "name": "<%- name %>",
+  "name": "",
   "private": true,
-  "authors": [
-    "<%- creator %>"
-  ]
+  "authors": []
 }

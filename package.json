@@ -15,7 +15,6 @@
   "private": true,
   "dependencies": {
     "async": "^2.0.0-rc.3",
-    "bluebird": "^3.3.5",
     "colors": "^1.1.2",
     "fs-extra": "^0.28.0",
     "git-config": "0.0.7",
