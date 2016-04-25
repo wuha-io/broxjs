@@ -6,6 +6,7 @@ import async from 'async';
 import gitconfig from 'git-config';
 import prompt from 'prompt';
 import colors from 'colors';
+import cproc from 'child_process';
 
 const CUR_DIR = process.cwd();
 const TPL_DIR = '/usr/local/lib/node_modules/broxjs/template';
@@ -64,6 +65,7 @@ gitconfig((err, gconfig) => {
     if (err) return error(err);
 
     const operations = [];
+    const copyOperation = (srcFile, dstFile) => operations.push(cbk => fs.copy(srcFile, dstFile, cbk));
     const writeJsonOperation = (file, obj) => operations.push(cbk => fs.writeJson(file, obj, {spaces: 2}, cbk));
 
     const extInfos = require(TPL_DIR + '/extension.json');
@@ -87,11 +89,18 @@ gitconfig((err, gconfig) => {
     bower.authors.push(result.author);
     writeJsonOperation(CUR_DIR + '/bower.json', bower);
 
+    [ 'babelrc', 'bowerrc', 'editorconfig', 'gitattributes', 'gitignore', 'jshintrc' ]
+      .forEach(file => copyOperation(TPL_DIR + '/' + file, CUR_DIR + '/.' + file));
+
     [ 'assets/', 'src/', 'test/', 'views/' ]
-      .concat([ '.babelrc', '.bowerrc', '.editorconfig', '.gitattributes', '.gitignore', '.jshintrc' ])
       .concat([ 'LICENSE', 'README.md' ])
       .concat([ 'gulpfile.babel.js' ])
-        .forEach(file => operations.push(cbk => fs.copy(TPL_DIR + '/' + file, CUR_DIR, cbk)));
+        .forEach(file => copyOperation(TPL_DIR + '/' + file, CUR_DIR + '/' + file));
+
+    operations.push(cbk => {
+      console.log('\nInstalling dependencies...'.bold.red);
+      cproc.exec('npm i && bower i', cbk);
+    });
 
     async.parallel(operations, (err, results) => {
 

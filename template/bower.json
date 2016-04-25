@@ -1,5 +1,9 @@
 {
   "name": "",
   "private": true,
-  "authors": []
+  "authors": [],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6"
+  }
 }

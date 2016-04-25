@@ -22,6 +22,10 @@ var _colors = require('colors');
 
 var _colors2 = _interopRequireDefault(_colors);
 
+var _child_process = require('child_process');
+
+var _child_process2 = _interopRequireDefault(_child_process);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CUR_DIR = process.cwd();
@@ -81,6 +85,11 @@ var error = function error(err) {
     if (err) return error(err);
 
     var operations = [];
+    var copyOperation = function copyOperation(srcFile, dstFile) {
+      return operations.push(function (cbk) {
+        return _fsExtra2.default.copy(srcFile, dstFile, cbk);
+      });
+    };
     var writeJsonOperation = function writeJsonOperation(file, obj) {
       return operations.push(function (cbk) {
         return _fsExtra2.default.writeJson(file, obj, { spaces: 2 }, cbk);
@@ -108,10 +117,17 @@ var error = function error(err) {
     bower.authors.push(result.author);
     writeJsonOperation(CUR_DIR + '/bower.json', bower);
 
-    ['assets/', 'src/', 'test/', 'views/'].concat(['.babelrc', '.bowerrc', '.editorconfig', '.gitattributes', '.gitignore', '.jshintrc']).concat(['LICENSE', 'README.md']).concat(['gulpfile.babel.js']).forEach(function (file) {
-      return operations.push(function (cbk) {
-        return _fsExtra2.default.copy(TPL_DIR + '/' + file, CUR_DIR, cbk);
-      });
+    ['babelrc', 'bowerrc', 'editorconfig', 'gitattributes', 'gitignore', 'jshintrc'].forEach(function (file) {
+      return copyOperation(TPL_DIR + '/' + file, CUR_DIR + '/.' + file);
+    });
+
+    ['assets/', 'src/', 'test/', 'views/'].concat(['LICENSE', 'README.md']).concat(['gulpfile.babel.js']).forEach(function (file) {
+      return copyOperation(TPL_DIR + '/' + file, CUR_DIR + '/' + file);
+    });
+
+    operations.push(function (cbk) {
+      console.log('\nInstalling dependencies...'.bold.red);
+      _child_process2.default.exec('npm i && bower i', cbk);
     });
 
     _async2.default.parallel(operations, function (err, results) {
