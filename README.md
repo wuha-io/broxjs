@@ -16,13 +16,14 @@ gulp jshint # check code syntax
 gulp test # run the test (directly in es6)
 gulp build # jshint, test, pre-clean and compile
 gulp # (default - for development) watch and build / run tests
+
+# To install globally (update binaries)
+sudo npm i -g .
 ```
 
 ## [TODO](https://github.com/wuha-io/broxjs/blob/master/TODO.md)
 
 ## [Configuration Unifier](https://github.com/wuha-io/broxjs/blob/master/doc/configUnifier.md)
-
-## [Yeoman Generator](https://github.com/wuha-io/generator-broxjs)
 
 ## Others
 
