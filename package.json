@@ -4,7 +4,7 @@
   "author": "Wuha <contact@wuha.io>",
   "description": "A pure JS Browser Extension Framework",
   "license": "MIT",
-  "main": "index.js",
+  "main": "build/index.js",
   "keywords": [
     "browser",
     "extension",
@@ -16,9 +16,11 @@
   "dependencies": {
     "async": "^2.0.0-rc.3",
     "colors": "^1.1.2",
+    "commander": "^2.9.0",
     "fs-extra": "^0.28.0",
     "git-config": "0.0.7",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "yesno": "0.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.0",
@@ -60,7 +62,7 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
-    "postinstall": "chmod -R 777 template/"
+    "postinstall": "chmod -R 777 template/ doc/manifest.mapping.json"
   },
   "repository": {
     "type": "git",

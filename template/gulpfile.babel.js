@@ -3,6 +3,7 @@
 import gulp from 'gulp';
 import gulpLoad from 'gulp-load-plugins';
 import seq from 'run-sequence';
+import cproc from 'child_process';
 
 const plugins = gulpLoad();
 const basePath = __dirname;
@@ -53,6 +54,8 @@ gulp.task('test', () => {
     reporter: 'spec'
   })).once('error', onError);
 });
+
+gulp.task('pack', cbk => cproc.exec('broxjs --pack', cbk));
 
 gulp.task('default', () => {
   gulp.watch(glob.src, ['build']);

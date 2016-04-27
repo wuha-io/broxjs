@@ -1,69 +1,63 @@
 {
-  "platforms": [
-    "chrome",
-    "firefox"
-  ],
-  "properties": {
-    "name": {
-      "required": true
+  "name": {
+    "required": true
+  },
+  "version": {
+    "required": true
+  },
+  "default_locale": {
+    "recommended": true
+  },
+  "description": {
+    "recommended": true
+  },
+  "icons": {
+    "children": {
+      "16": "string",
+      "48": "string",
+      "128": "string"
     },
-    "version": {
-      "required": true
-    },
-    "default_locale": {
-      "recommended": true
-    },
-    "description": {
-      "recommended": true
-    },
-    "icons": {
-      "children": {
-        "16": "string",
-        "48": "string",
-        "128": "string"
+    "recommended": true
+  },
+  "browser_action": {
+    "children": {
+      "default_icon": {
+        "children":{
+          "19": "string",
+          "38": "string"
+        }
       },
-      "recommended": true
-    },
-    "browser_action": {
-      "children": {
-        "default_icon": {
-          "children":{
-            "19": "string",
-            "38": "string"
-          }
-        },
-        "default_title": "string",
-        "default_popup": "string"
-      }
-    },
-    "author": "string",
-    "background": {
-      "children": {
-        "page": "string",
-        "scripts": "string[]"
-      }
-    },
-    "content_scripts": {
-      "children": {
-        "exclude_matches": "string[]",
-        "matches": "string[]",
-        "js": "string[]",
-        "css": "string[]",
-        "run_at": "string",
-        "all_frames": "boolean"
-      }
-    },
-    "permissions": "string[]",
-    "update_url":  {
-      "mapping": {
-        "firefox": "applications.gecko.update_url"
-      }
-    },
-    "extension_url":  {
-      "mapping": {
-        "chrome":"homepage_url",
-        "firefox": "developer.url"
-      }
+      "default_title": "string",
+      "default_popup": "string"
+    }
+  },
+  "author": "string",
+  "background": {
+    "children": {
+      "page": "string",
+      "scripts": "string[]"
+    }
+  },
+  "content_scripts": {
+    "children": {
+      "exclude_matches": "string[]",
+      "matches": "string[]",
+      "js": "string[]",
+      "css": "string[]",
+      "run_at": "string",
+      "all_frames": "boolean"
+    }
+  },
+  "permissions": "string[]",
+  "update_url":  {
+    "mapping": {
+      "firefox": "applications.gecko.update_url"
+    }
+  },
+  "extension_url":  {
+    "mapping": {
+      "chrome":"homepage_url",
+      "firefox": "developer.url"
     }
   }
 }
