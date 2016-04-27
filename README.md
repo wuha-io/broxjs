@@ -25,6 +25,12 @@ sudo npm i -g .
 
 ## [Configuration Unifier](https://github.com/wuha-io/broxjs/blob/master/doc/configUnifier.md)
 
+# API
+
+## [logger](https://github.com/wuha-io/broxjs/blob/dev/doc/api/logger.md)
+## [notification](https://github.com/wuha-io/broxjs/blob/dev/doc/api/notification.md)
+## [browserButton](https://github.com/wuha-io/broxjs/blob/dev/doc/api/browserButton.md)
+
 ## Others
 
 - [Chrome documentation](https://developer.chrome.com/extensions/api_index)
