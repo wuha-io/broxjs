@@ -30,6 +30,7 @@ sudo npm i -g .
 - [logger](https://github.com/wuha-io/broxjs/blob/dev/doc/api/logger.md)
 - [notification](https://github.com/wuha-io/broxjs/blob/dev/doc/api/notification.md)
 - [browserButton](https://github.com/wuha-io/broxjs/blob/dev/doc/api/browserButton.md)
+- [alarms](https://github.com/wuha-io/broxjs/blob/dev/doc/api/alarms.md)
 
 ## Others
 

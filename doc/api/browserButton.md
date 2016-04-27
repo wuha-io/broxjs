@@ -23,7 +23,7 @@ To use this API you need :
 
 ## Method
 
-```
+```javascript
 title()
 icon()
 popup()
@@ -41,11 +41,11 @@ broxjs.browserButton.title().then( title => {
 
 ## Event
 
-```
+```javascript
 onClicked
 ```
 
-## Example
+### Example
 
 ```javascript
 broxjs.browserButton.onClicked(function (tab) {

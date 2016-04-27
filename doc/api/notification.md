@@ -7,11 +7,11 @@ To use this API you need to have the "notifications" permission.
 
 ## Method
 
-```
-create(id, options, function(id) { ... });
-update(id, options, function(boolean wasUpdated) { ... });
-clear(id, function (boolean wasCleared) { ... });
-getAll(function ());
+```javascript
+create(id, options);
+update(options);
+close();
+getAll();
 ```
 
 ## Options
@@ -29,23 +29,33 @@ var notifId = null;
 
 broxjs.notification.create({title: 'this is a title', message: 'this is a message'})
   .then( notif => {
-    return notif.update(notifId, {title: 'this is a new title'});
+    return notif.update({title: 'this is a new title'});
   })
   .then(notif => notif.close());
 ```
 
 ## Event
 
+Type of event
+
 ```
-onClosed
-onClicked
-onButtonClicked
+closed
+clicked
+buttonClicked
 ```
 
-## Example
+Method
 
 ```javascript
-broxjs.notification.addEventListener('closed', function (notif) {
+addListener(type, function(Notif notif, boolean byUser) { ... }) // Adds a listener to this event.
+removeListener(type, function () { ... }) // Stop listening to this event. The listener argument is the listener to remove.
+hasListener(type, function () { ... }) // Check whether listener is registered for this event. Returns true if it is listening, false otherwise.
+```
+
+### Example
+
+```javascript
+broxjs.notification.addListener('closed', function (notif) {
   console.log('notif with id ', notif.id, 'is closed');
 });
 ```
