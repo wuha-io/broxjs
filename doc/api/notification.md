@@ -1,4 +1,3 @@
-
 # API : notification
 
 
@@ -16,12 +15,12 @@ getAll(function ());
 ```
 
 ## Options
-|List of all options|Value|Description
-|:-|:-|:-|
-|type        | basic | The type of notification you want.<br> Depending on your choice here, certain other properties are either mandatory or are not permitted.
-|iconUrl     | String      | A URL pointing to an icon to display in the notification.
-|title       | String      | The notification's title.
-|message     | String      | The notification's main content.
+|List of all options|Value|Description|
+|:----------|:----------|:----------|
+|type        | basic | The type of notification you want.<br> Depending on your choice here, certain other properties are either mandatory or are not permitted.|
+|iconUrl     | String      | A URL pointing to an icon to display in the notification.|
+|title       | String      | The notification's title.|
+|message     | String      | The notification's main content.|
 
 ### Example
 
