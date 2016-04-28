@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "",
-  "version": "",
-  "author": "",
-  "description": "",
+  "name": "My Extension",
+  "version": "0.1.0",
+  "author": "Arnaud Laval <alaval@wuha.io>",
+  "description": "This is a default description.",
   "extension_url": "",
-  "update_url": "",
-  "default_locale":"en",
+  "update_url": "/update",
+  "default_locale": "en",
   "icons": {
     "128": "images/icon-128.png"
   },
@@ -14,7 +14,7 @@
     "default_icon": {
       "38": "images/icon-38.png"
     },
-    "default_title": "<%- name %>",
+    "default_title": "My Extension",
     "default_popup": "html/popup.html"
   },
   "background": {
@@ -24,7 +24,7 @@
     "page": "html/background.html"
   },
   "permissions": [],
-  "content_scripts":  [
+  "content_scripts": [
     {
       "exclude_matches": [],
       "matches": [

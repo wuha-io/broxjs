@@ -9,6 +9,7 @@ import prompt from 'prompt';
 import yesno from 'yesno';
 import colors from 'colors';
 import cproc from 'child_process';
+import sllog from 'single-line-log';
 
 import broxjs from '../index';
 
@@ -33,6 +34,34 @@ if (projectName) {
 const error = err => {
   console.error(err);
   process.exit(1);
+};
+
+let animeLogI = 0;
+let log  = sllog.stdout;
+const animeLog = () => {
+  log.clear();
+  let temp = '';
+  let i = 0;
+  while(i < animeLogI) {
+    temp = temp + '    ';
+    i = i + 1;
+  }
+  var last = '';
+  switch (animeLogI % 2) {
+    case 0:
+      last = '   ]\\_  \n';
+      break;
+    default:
+      last = '   /_[  \n';
+  }
+  log(temp + '      MM \n' +
+      temp + '|\\___/ `>\n' +
+      temp + ' \\_  _/ \n' +
+      temp + last);
+  animeLogI = animeLogI + 1;
+  if(animeLogI >= 5) {
+    animeLogI = 0;
+  }
 };
 
 const init = () => {
@@ -128,12 +157,20 @@ const init = () => {
         if (!installDeps)
           return cbk();
         console.log('\nInstalling dependencies...'.bold.red);
-        cproc.exec('npm i && bower i', cbk);
+        let npmi = cproc.exec('npm i && bower i');
+        let animate = setInterval(animeLog, 400);
+        npmi.on('close', (code) => {
+          clearInterval(animate);
+          cbk();
+        });
+        npmi.on('error', (err) => {
+          cbk(err);
+        });
       });
 
       async.series(operations, (err, results) => {
         if (err) return error(err);
-        console.log('\nCongralutions! Your extension is ready'.bold.green);
+        console.log('\nCongralutions! Your extension is ready\n'.bold.green);
         prompt.stop();
       });
 

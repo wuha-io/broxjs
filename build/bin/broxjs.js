@@ -34,6 +34,10 @@ var _child_process = require('child_process');
 
 var _child_process2 = _interopRequireDefault(_child_process);
 
+var _singleLineLog = require('single-line-log');
+
+var _singleLineLog2 = _interopRequireDefault(_singleLineLog);
+
 var _index = require('../index');
 
 var _index2 = _interopRequireDefault(_index);
@@ -58,6 +62,31 @@ if (projectName) {
 var error = function error(err) {
   console.error(err);
   process.exit(1);
+};
+
+var animeLogI = 0;
+var log = _singleLineLog2.default.stdout;
+var animeLog = function animeLog() {
+  log.clear();
+  var temp = '';
+  var i = 0;
+  while (i < animeLogI) {
+    temp = temp + '    ';
+    i = i + 1;
+  }
+  var last = '';
+  switch (animeLogI % 2) {
+    case 0:
+      last = '   ]\\_  \n';
+      break;
+    default:
+      last = '   /_[  \n';
+  }
+  log(temp + '      M \n' + temp + '|\\___/ `>\n' + temp + ' \\_  _/° \n' + temp + last);
+  animeLogI = animeLogI + 1;
+  if (animeLogI >= 5) {
+    animeLogI = 0;
+  }
 };
 
 var init = function init() {
@@ -162,12 +191,20 @@ var init = function init() {
       operations.push(function (cbk) {
         if (!installDeps) return cbk();
         console.log('\nInstalling dependencies...'.bold.red);
-        _child_process2.default.exec('npm i && bower i', cbk);
+        var npmi = _child_process2.default.exec('npm i && bower i');
+        var animate = setInterval(animeLog, 400);
+        npmi.on('close', function (code) {
+          clearInterval(animate);
+          cbk();
+        });
+        npmi.on('error', function (err) {
+          cbk(err);
+        });
       });
 
       _async2.default.series(operations, function (err, results) {
         if (err) return error(err);
-        console.log('\nCongralutions! Your extension is ready'.bold.green);
+        console.log('\nCongralutions! Your extension is ready\n'.bold.green);
         _prompt2.default.stop();
       });
     });
@@ -179,7 +216,6 @@ var pack = function pack() {
 
   var configMapping = require(BROXJS_DIR + '/doc/manifest.mapping.json');
   var extInfos = require(currentDir + '/extension.json');
-
   console.log(_index2.default.configUnifier('chrome', configMapping, extInfos));
 };
 

@@ -1,7 +1,9 @@
 {
-  "name": "",
+  "name": "my-extension",
   "private": true,
-  "authors": [],
+  "authors": [
+    "Arnaud Laval <alaval@wuha.io>"
+  ],
   "dependencies": {
     "jquery": "^2.2.3",
     "bootstrap": "^3.3.6"
